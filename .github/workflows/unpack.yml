@@ -1,8 +1,5 @@
 name: Unpack site
 on:
-  push:
-    paths:
-      - '*.zip'
   workflow_dispatch:
 permissions:
   contents: write
@@ -14,11 +11,11 @@ jobs:
       - name: Unpack the zip and tidy up
         run: |
           set -e
-          ZIP=$(ls *.zip | head -1)
+          ZIP=$(find . -name '*.zip' -not -path './.git/*' | head -1)
+          echo "Found: $ZIP"
           mkdir /tmp/site
           unzip -q "$ZIP" -d /tmp/site
-          git rm -rq --ignore-unmatch . ':!.github' ':!*.zip'
-          rm -f *.zip
+          git rm -rq --ignore-unmatch . ':!.github/workflows/unpack.yml'
           cp -a /tmp/site/. .
           git config user.name "github-actions"
           git config user.email "actions@github.com"
