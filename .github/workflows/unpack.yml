@@ -1,0 +1,27 @@
+name: Unpack site
+on:
+  push:
+    paths:
+      - '*.zip'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  unpack:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Unpack the zip and tidy up
+        run: |
+          set -e
+          ZIP=$(ls *.zip | head -1)
+          mkdir /tmp/site
+          unzip -q "$ZIP" -d /tmp/site
+          git rm -rq --ignore-unmatch . ':!.github' ':!*.zip'
+          rm -f *.zip
+          cp -a /tmp/site/. .
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add -A
+          git commit -m "Unpack site files"
+          git push
