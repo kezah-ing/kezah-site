@@ -1,0 +1,144 @@
+{
+  "heroEyebrow": "Venture & Business Architect · Kigali",
+  "heroLine1": "I design the systems",
+  "heroLine2": "that make Africa's blind",
+  "heroLine3Plain": "spots",
+  "heroLine3Accent": "measurable,",
+  "heroLine4": "and fixable.",
+  "heroIntro": "I work with governments, corporates and development partners to turn a failing outcome into a system they can fund and build: the research, the architecture, the business model and the regulatory pathway.",
+  "primaryCta": "Book a free 15-minute consult",
+  "primaryCtaNote": "Free 15-minute initial consult · no preparation needed",
+  "portrait": "kezah.webp",
+  "portraitCaption": "Kezah Kayitesi · Kigali",
+  "email": "services@kezahkayitesi.com",
+  "phone": "+250 781 889 592",
+  "phoneLink": "+250781889592",
+  "calendarUrl": "https://cal.com/kayitesi-kezah-xzgbif",
+  "bookingTitle": "Book a free 15-minute consult",
+  "bookingText": "We start with a free 15-minute initial conversation. If you want to go further, you then book a full 60-minute exploration call at $250.",
+  "formEndpoint": null,
+  "bioHeading": "Kezah Kayitesi is a venture and business architect based in Kigali, Rwanda.",
+  "bioShort": "She works with governments, corporates, development partners and founders to move from the people a system is failing to a Solutions Manual a team can fund and build. She co-founded Snappe, taking it from beta to MVP, and has led research for an AfDB workstream at Open Capital Advisors.",
+  "bioPdf": null,
+  "metaDescription": "Kezah Kayitesi is a venture and business architect in Kigali. She designs the systems that make Africa's blind spots measurable, and fixable.",
+  "shareImage": null,
+  "offersHeading": "Four ways to work with me, from first question to a team that builds.",
+  "offersCta": "Not sure which one fits? Start with a free 15-minute consult.",
+  "workHeading": "Systems I have architected, each stated exactly as it stands.",
+  "methodHeading": "Pains to Systems. It starts with the people a system is failing.",
+  "methodIntro": "Six stages. What you receive at the Blueprint stage is the Solutions Manual. It is how a client gets there, never the point.",
+  "whyHeading": "I design the rails that level the odds, because access, not ability, decides most lives.",
+  "whyIntro": "I grew up in Kenya as a refugee of the 1994 Genocide against the Tutsi. I lived uptown; many of my cousins did not. Same family, different odds, and the difference was access. Every line below is a person, and the system built for them.",
+  "writingHeading": "Heart & Mind",
+  "writingIntro": "A look into my mind outside work. Articles, essays and poems, monthly.",
+  "contactHeading": "Tell me what is failing. We will find out why.",
+  "blindSpots": [
+    {
+      "number": "80%",
+      "text": "of Rwanda's FMCG trade is invisible to the revenue authority.",
+      "source": "BEV Digital"
+    },
+    {
+      "number": "45%",
+      "text": "of young women still don't get an HIV test, though 96% of 15–24-year-olds know where to.",
+      "source": "SRB"
+    },
+    {
+      "number": "Under 30%",
+      "text": "of the $96B reaching Africa as remittances arrives at productive investment.",
+      "source": "Kesho"
+    }
+  ],
+  "methodStages": [
+    {
+      "name": "Explore",
+      "what": "Discovery calls to understand the client's needs and ideal outcome.",
+      "out": "A shared definition of the problem and success."
+    },
+    {
+      "name": "Research",
+      "what": "Industry and problem research.",
+      "out": "Evidence of the root cause and where data is missing."
+    },
+    {
+      "name": "Design",
+      "what": "Three to four concept sprints, co-created with the client at two levels for alignment.",
+      "out": "An agreed concept."
+    },
+    {
+      "name": "Blueprint",
+      "what": "Building the documentation the problem needs.",
+      "out": "The Solutions Manual: concept note, slides, legal blueprint, FRD, system design."
+    },
+    {
+      "name": "Submit",
+      "what": "Final delivery.",
+      "out": "A handover ready for funding or approval."
+    },
+    {
+      "name": "Assemble (optional)",
+      "what": "Curating the execution team for the sector.",
+      "out": "A briefed build team."
+    }
+  ],
+  "ribbonWords": [
+    "Explore",
+    "Research",
+    "Design",
+    "Blueprint",
+    "Submit",
+    "Assemble",
+    "Pains to Systems"
+  ],
+  "whyRows": [
+    {
+      "line": "A P3 learner in a rural province who can actually read.",
+      "venture": "SOMA 1",
+      "link": "/work/soma-1"
+    },
+    {
+      "line": "A distributor looped into the credit system, not punished for their size.",
+      "venture": "BEV Digital",
+      "link": "/work/bev-digital"
+    },
+    {
+      "line": "A mother who gives her child medicine without gambling on its authenticity.",
+      "venture": "BEV Digital",
+      "link": "/work/bev-digital"
+    },
+    {
+      "line": "Free health care, because life ought not be sold.",
+      "venture": "Med-i",
+      "link": ""
+    }
+  ],
+  "metrics": [
+    {
+      "value": 3831,
+      "plus": false,
+      "label": "primary schools in SOMA 1's national design"
+    },
+    {
+      "value": 2500,
+      "plus": true,
+      "label": "young people engaged through participatory action research"
+    },
+    {
+      "value": 1000,
+      "plus": true,
+      "label": "vendors on Snappe, which I co-founded"
+    },
+    {
+      "value": 2,
+      "plus": false,
+      "label": "countries where AC Group revenue reporting was adopted"
+    }
+  ],
+  "credentials": [
+    "BA, International Business & Trade, First Class Honours, African Leadership University (2017–2020)",
+    "MBA, Innovation & Entrepreneurship, One League University (2022–2024)",
+    "Management Science & Engineering, Stanford Center for Professional Development (2023)",
+    "Four University of Geneva courses in investment and portfolio management; Jasiri alumna (2021)"
+  ],
+  "footerLine": "© 2026 Kezah Kayitesi · Kigali, Rwanda"
+}

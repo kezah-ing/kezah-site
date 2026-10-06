@@ -1,0 +1,42 @@
+{
+  "order": 3,
+  "featured": true,
+  "sector": "Capital markets",
+  "geography": "Qatar and East Africa",
+  "method": "",
+  "oneLine": "A regulated Qatar–East Africa marketplace for tokenised real estate, based in Doha under the QFC framework.",
+  "outcome": "One regulated venue where property across the Gulf and Africa is visible, comparable, ownable from a small ticket, and sellable before exit.",
+  "status": "Pre-revenue · FY2027 first operating year",
+  "clientName": "",
+  "confidentiality": "",
+  "role": "",
+  "cover": "kesho.webp",
+  "deckStyle": "navy",
+  "deckStyleLabel": "",
+  "deckSlides": 15,
+  "canvaUrl": null,
+  "canvaDesignId": "",
+  "pdf": "kesho-deck.pdf",
+  "metrics": [
+    {
+      "value": "FY2027",
+      "label": "first year of operation"
+    },
+    {
+      "value": "~$2.0M",
+      "label": "being raised"
+    },
+    {
+      "value": "Under 30%",
+      "label": "of the $96B reaching Africa as remittances arrives at productive investment"
+    }
+  ],
+  "aha": "",
+  "hypothesis": "",
+  "validation": "",
+  "concept": "A regulated Qatar–East Africa marketplace for tokenised real estate, based in Doha under the QFC framework. Pre-revenue; FY2027 is the first year of operation; raising approximately $2.0M.",
+  "evidence": [],
+  "lessons": "",
+  "seoDescription": "Kesho: a planned regulated Qatar–East Africa marketplace for tokenised real estate, based in Doha under the QFC framework. Pre-revenue.",
+  "title": "Kesho"
+}

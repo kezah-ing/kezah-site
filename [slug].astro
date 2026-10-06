@@ -1,0 +1,103 @@
+---
+import Base from '../../layouts/Base.astro';
+import DeckCover from '../../components/DeckCover.astro';
+import { reader, getSite, getDecks, paras } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const decks = await getDecks();
+  return decks.map((d, i) => ({ params: { slug: d.slug }, props: { deck: d, next: decks[(i + 1) % decks.length] } }));
+}
+const { deck: d, next } = Astro.props;
+const site = await getSite();
+const canvaOnly = !d.pdfUrl && d.canvaUrl;
+const arrow = 'M5 12h14M13 6l6 6-6 6';
+const facts = [['Sector', d.sector], ['Method', d.method], ['Geography', d.geography], ['My role', d.role], ['Client or partner', d.clientName]].filter(([, v]) => v);
+const image = d.coverUrl ?? undefined;
+---
+<Base title={`${d.title} case study`} description={d.seoDescription || d.oneLine} image={image} type="article">
+  <section style="padding:clamp(40px,7vw,90px) 0 20px">
+    <div class="wrap" style="max-width:1200px">
+      <a href="/#work" class="crumb"><svg class="arrow" style="width:16px;height:16px;transform:rotate(180deg)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={arrow}/></svg>All work</a>
+      <div class="eyebrow fadeup" style="margin-top:36px">Case study{d.sector ? ` · ${d.sector}` : ''}{d.geography ? ` · ${d.geography}` : ''}</div>
+      <h1 class="cs-title fadeup">{d.title}</h1>
+      {d.outcome && <p class="fadeup" style="margin:24px 0 0;max-width:720px;font-size:clamp(18px,2vw,24px);line-height:1.45;color:var(--soft)">{d.outcome}</p>}
+      <div class="fadeup" style="margin-top:28px"><div class="chip">{d.status}</div></div>
+    </div>
+  </section>
+
+  <section style="padding:40px 0">
+    <div class="wrap" style="max-width:1200px">
+      <DeckCover deck={d} eager />
+      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:22px">
+        {d.pdfUrl && <a href="#deck" class="btn btn-primary hide-sm">Read the deck</a>}
+        {d.pdfUrl && <a href={d.pdfUrl} class="btn btn-ghost" download>Download the PDF</a>}
+        {canvaOnly && <a href={d.canvaUrl!} target="_blank" rel="noopener" class="btn btn-primary">Read the deck</a>}
+        {d.pdfUrl && d.canvaUrl && <a href={d.canvaUrl} target="_blank" rel="noopener" class="btn btn-ghost">View in Canva</a>}
+        {!d.pdfUrl && !d.canvaUrl && <span class="mono" style="font-size:12px;color:var(--muted)">The deck for this project is being prepared. Ask me for it on a call.</span>}
+      </div>
+    </div>
+  </section>
+
+  {d.metrics.length > 0 && (
+    <section style="padding:40px 0">
+      <div class="wrap" style="max-width:1200px">
+        <div class="g-auto" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:16px">
+          {d.metrics.map((m) => (
+            <div class="card metric" style="padding:24px" data-reveal>
+              <div class="bignum" style="font-size:clamp(36px,4.2vw,56px)">{m.value}</div>
+              <div style="margin-top:12px;font-size:15px;line-height:1.45;color:var(--soft)">{m.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section style="padding:40px 0 70px">
+    <div class="wrap" style="max-width:1200px">
+      <div class="cs-grid">
+        <div class="prose">
+          {paras(d.concept).map((p) => <p>{p}</p>)}
+          {d.aha && <><h2>The insight</h2>{paras(d.aha).map((p) => <p>{p}</p>)}</>}
+          {d.hypothesis && <><h2>Hypothesis</h2>{paras(d.hypothesis).map((p) => <p>{p}</p>)}</>}
+          {d.validation && <><h2>Validation</h2>{paras(d.validation).map((p) => <p>{p}</p>)}</>}
+          {d.evidence.length > 0 && (
+            <><h2>Evidence</h2>
+              <div class="evidence">{d.evidence.map((e) => (
+                <div class="card"><div class="mono" style="font-size:11px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase">{e.label}</div><div class="serif" style="font-size:30px;font-weight:300;color:var(--ac);margin-top:6px">{e.value}</div><div style="font-size:14px;color:var(--soft);margin-top:6px;line-height:1.45">{e.note}</div></div>
+              ))}</div></>
+          )}
+          {d.lessons && <><h2>Lessons</h2>{paras(d.lessons).map((p) => <p>{p}</p>)}</>}
+          {d.confidentiality && <p class="mono" style="font-size:12px;color:var(--muted)">{d.confidentiality}</p>}
+        </div>
+        <aside class="aside">
+          {facts.map(([k, v]) => <><div class="k">{k}</div><div class="v">{v}</div></>)}
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  {d.pdfUrl && (
+    <section id="deck" class="hide-sm" style="padding:0 0 70px">
+      <div class="wrap" style="max-width:1200px">
+        <div class="eyebrow" style="margin-bottom:18px">The deck</div>
+        <object class="pdfview" data={`${d.pdfUrl}#view=FitH`} type="application/pdf" aria-label={`${d.title} deck`}>
+          <p style="padding:24px">Your browser can't show the deck here. <a href={d.pdfUrl} style="text-decoration:underline">Download the PDF</a>.</p>
+        </object>
+      </div>
+    </section>
+  )}
+
+  <section style="padding:20px 0 100px">
+    <div class="wrap" style="max-width:1200px">
+      <div class="contact-box" style="border-radius:24px;padding:clamp(26px,5vw,56px);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px">
+        <div class="serif" style="font-size:clamp(26px,3.2vw,42px);font-weight:300;line-height:1.1;max-width:640px">Have a system that is failing and no record of why?</div>
+        <a href="/#contact" class="btn btn-primary">{site.primaryCta}</a>
+      </div>
+      <div style="margin-top:32px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;font-size:15px">
+        <a href="/#work" style="color:var(--soft)">Back to all work</a>
+        {next && next.slug !== d.slug && <a href={`/work/${next.slug}`} style="font-weight:600">Next: {next.title} →</a>}
+      </div>
+    </div>
+  </section>
+</Base>

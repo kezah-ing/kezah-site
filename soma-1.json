@@ -1,0 +1,38 @@
+{
+  "order": 2,
+  "featured": true,
+  "sector": "Education",
+  "geography": "Rwanda",
+  "method": "",
+  "oneLine": "A national digital curriculum platform bringing Rwanda's best primary teachers to all 3,831 primary schools, at $1.80 per student per year.",
+  "outcome": "A national digital curriculum platform designed to bring Rwanda's best primary teachers to every primary school.",
+  "status": "Submitted for ministerial review",
+  "clientName": "",
+  "confidentiality": "",
+  "role": "",
+  "cover": "soma-1.webp",
+  "deckStyle": "editorial",
+  "deckStyleLabel": "",
+  "deckSlides": 7,
+  "canvaUrl": "https://www.canva.com/d/Ft05cZPMbp8f5dm",
+  "canvaDesignId": "DAHWFiHj1bQ",
+  "pdf": "soma-1-deck.pdf",
+  "metrics": [
+    {
+      "value": "3,831",
+      "label": "primary schools in SOMA 1's national design"
+    },
+    {
+      "value": "$1.80",
+      "label": "per student per year"
+    }
+  ],
+  "aha": "",
+  "hypothesis": "",
+  "validation": "",
+  "concept": "",
+  "evidence": [],
+  "lessons": "",
+  "seoDescription": "SOMA 1: a national digital curriculum platform for Rwanda’s primary schools, submitted for ministerial review.",
+  "title": "SOMA 1"
+}

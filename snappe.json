@@ -1,0 +1,42 @@
+{
+  "order": 4,
+  "featured": true,
+  "sector": "Marketplaces",
+  "geography": "Kenya, Uganda and Nigeria",
+  "method": "",
+  "oneLine": "A marketplace formalising East Africa's second-hand clothing trade. Co-founded; 1,000+ vendors, 100+ riders and a banking partner. Currently paused.",
+  "outcome": "A marketplace formalising East Africa's second-hand clothing trade, taken from beta to MVP with 1,000+ vendors, 100+ riders and a banking partner.",
+  "status": "Co-founded · beta to MVP · currently paused",
+  "clientName": "",
+  "confidentiality": "",
+  "role": "Co-founder",
+  "cover": "snappe.webp",
+  "deckStyle": "editorial",
+  "deckStyleLabel": "",
+  "deckSlides": 7,
+  "canvaUrl": "https://www.canva.com/d/zmai4SBXaetAAB-",
+  "canvaDesignId": "DAHWFu8xBfI",
+  "pdf": "snappe-deck.pdf",
+  "metrics": [
+    {
+      "value": "1,000+",
+      "label": "vendors"
+    },
+    {
+      "value": "100+",
+      "label": "riders"
+    },
+    {
+      "value": "500+",
+      "label": "cash-in-cash-out agents"
+    }
+  ],
+  "aha": "",
+  "hypothesis": "",
+  "validation": "",
+  "concept": "",
+  "evidence": [],
+  "lessons": "",
+  "seoDescription": "Snappe: a marketplace formalising the second-hand clothing trade in Kenya, Uganda and Nigeria, co-founded by Kezah Kayitesi. Currently paused.",
+  "title": "Snappe"
+}

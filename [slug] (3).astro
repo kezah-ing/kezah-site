@@ -1,0 +1,19 @@
+---
+import Base from '../../layouts/Base.astro';
+import { reader, paras, fmtDate } from '../../lib/content';
+export async function getStaticPaths() {
+  const all = await reader.collections.articles.all();
+  return all.filter((a) => a.entry.show && a.entry.body).map((a) => ({ params: { slug: a.slug }, props: { a: a.entry } }));
+}
+const { a } = Astro.props;
+---
+<Base title={a.title} description={a.gist} type="article">
+  <article class="section" style="padding-bottom:100px">
+    <div class="wrap article">
+      <a href="/#writing" class="crumb">← What I Think</a>
+      <div class="eyebrow" style="margin-top:36px">{[fmtDate(a.date), a.series || a.type].filter(Boolean).join(' · ')}</div>
+      <h1 class="cs-title" style="font-size:clamp(38px,6vw,76px)">{a.title}</h1>
+      <div class="prose" style="margin-top:40px">{paras(a.body).map((p) => <p>{p}</p>)}</div>
+    </div>
+  </article>
+</Base>

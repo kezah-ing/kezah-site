@@ -1,0 +1,42 @@
+{
+  "order": 1,
+  "featured": true,
+  "sector": "Supply chain",
+  "geography": "Rwanda",
+  "method": "Systems architecture, regulatory design, business modelling",
+  "oneLine": "A national FMCG traceability platform: cryptographic unit identity at the factory, an append-only custody ledger, five role-based portals and live compliance checks.",
+  "outcome": "Rwanda's $2.1B FMCG market runs without a shared record of what moves through it. BEV Digital assigns every product a cryptographic identity at the factory and logs every handoff on an append-only ledger.",
+  "status": "Proof of concept with Inyange Industries proposed",
+  "clientName": "",
+  "confidentiality": "",
+  "role": "",
+  "cover": "bev-digital.webp",
+  "deckStyle": "green",
+  "deckStyleLabel": "",
+  "deckSlides": 15,
+  "canvaUrl": null,
+  "canvaDesignId": "",
+  "pdf": "bev-digital-deck.pdf",
+  "metrics": [
+    {
+      "value": "$2.1B",
+      "label": "Rwanda FMCG market, 2026"
+    },
+    {
+      "value": "80%",
+      "label": "of FMCG trade invisible to the revenue authority ($1.7B informal)"
+    },
+    {
+      "value": "3",
+      "label": "regulator API checks (RDB, RRA, RBS/FDA), each returning in under 2 seconds"
+    }
+  ],
+  "aha": "",
+  "hypothesis": "",
+  "validation": "",
+  "concept": "Four fifths of Rwanda's FMCG trade is invisible to the tax authority. Counterfeits can't be told from genuine stock, contaminated batches can't be traced to their holders, and small distributors with real trading histories stay permanently outside finance.\n\nBEV Digital treats this as an infrastructure gap rather than a software problem. Each product receives an HMAC-SHA256 identity integrated into packaging at the design stage, GS1 Digital Link compliant, so no stickers or hardware are required. Every custody handoff writes a tamper-proof event to an append-only ledger, read through five role-based portals and three regulator APIs that clear in under two seconds.\n\nThe architecture is designed so the same ledger does four jobs at once: consumer authentication, 60-second recalls, progressive tax formalisation, and a credit score built from 180 days of scan history. A proof of concept with Inyange Industries is proposed to validate the model before national adoption is sought.",
+  "evidence": [],
+  "lessons": "",
+  "seoDescription": "BEV Digital: a proposed national product-identity and supply-chain ledger for Rwanda’s FMCG market. Concept and architecture complete; proof of concept proposed.",
+  "title": "BEV Digital"
+}

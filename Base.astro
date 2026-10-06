@@ -1,0 +1,70 @@
+---
+import '../styles/global.css';
+import { getSite } from '../lib/content';
+import fraunces from '@fontsource-variable/fraunces/files/fraunces-latin-wght-normal.woff2?url';
+import hanken from '@fontsource-variable/hanken-grotesk/files/hanken-grotesk-latin-wght-normal.woff2?url';
+interface Props { title?: string; description?: string; image?: string; intro?: boolean; type?: string }
+const site = await getSite();
+const { title, description = site.metaDescription, image, intro = false, type = 'website' } = Astro.props;
+const full = title ? `${title} | Kezah Kayitesi` : 'Kezah Kayitesi, Venture and Business Architect, Kigali';
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const og = new URL(image || '/og-default.png', Astro.site).href;
+const person = {
+  '@context': 'https://schema.org', '@type': 'Person', name: 'Kezah Kayitesi',
+  jobTitle: 'Venture and Business Architect', url: Astro.site?.href, email: site.email,
+  address: { '@type': 'PostalAddress', addressLocality: 'Kigali', addressCountry: 'RW' },
+};
+const links = [['Offers', '/#offers'], ['Work', '/#work'], ['Method', '/#method'], ['About', '/#about'], ['What I Think', '/#writing']];
+---
+<!doctype html>
+<html lang="en" class:list={[intro ? 'has-intro' : 'no-intro']}>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>{full}</title>
+  <meta name="description" content={description} />
+  <meta name="theme-color" content="#0C0E10" />
+  <link rel="canonical" href={canonical} />
+  <link rel="preload" as="font" type="font/woff2" href={fraunces} crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href={hanken} crossorigin />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta property="og:type" content={type} /><meta property="og:site_name" content="Kezah Kayitesi" />
+  <meta property="og:title" content={full} /><meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} /><meta property="og:image" content={og} />
+  <meta name="twitter:card" content="summary_large_image" /><meta name="twitter:image" content={og} />
+  <script is:inline>
+    (function(){var d=document.documentElement;d.classList.add('js');
+      try{if(matchMedia('(prefers-reduced-motion: reduce)').matches)d.classList.add('reduce');
+      if(sessionStorage.getItem('intro-seen')){d.classList.remove('has-intro');d.classList.add('no-intro');}
+      else if(d.classList.contains('has-intro')){sessionStorage.setItem('intro-seen','1');}}catch(e){}})();
+  </script>
+  <script type="application/ld+json" set:html={JSON.stringify(person)} />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  {intro && (
+    <div class="intro" aria-hidden="true">
+      <div class="intro-name">Kezah Kayitesi</div>
+      <div class="intro-line"></div>
+      <div class="mono" style="font-size:11px;letter-spacing:.2em;color:var(--muted);text-transform:uppercase">Making the invisible visible</div>
+    </div>
+  )}
+  <header class="site-header">
+    <div class="wrap in">
+      <a href="/" class="brand">Kezah Kayitesi</a>
+      <nav class="nav" aria-label="Main">
+        {links.map(([l, h]) => <a class="navlink" href={h} data-nav={h.replace('/', '')}>{l}</a>)}
+      </nav>
+      <a href="/#contact" class="btn btn-primary btn-sm">Book a call</a>
+    </div>
+  </header>
+  <main id="main"><slot /></main>
+  <footer class="footer">
+    <div class="wrap in">
+      <div>{site.footerLine}</div>
+      <a href="#" style="color:var(--text)" onclick="window.scrollTo({top:0});return false">Back to top</a>
+    </div>
+  </footer>
+  <script>import '../scripts/motion.ts';</script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+---
+import { TILE, type Deck } from '../lib/content';
+interface Props { deck: Deck; caption?: boolean; eager?: boolean }
+const { deck, caption = true, eager = false } = Astro.props;
+const th = TILE[deck.deckStyle] ?? TILE.other;
+---
+<div>
+  <figure class="deck" style={`--th:${th.bg}`}>
+    {deck.coverUrl ? (
+      <img src={deck.coverUrl} alt={`Cover slide of the ${deck.title} deck`} width="1600" height="900" loading={eager ? 'eager' : 'lazy'} decoding="async" />
+    ) : (
+      <div class="tile" style={`background:${th.bg};color:${th.fg}`} aria-hidden="true">
+        <span class="l" style={`color:${th.ac}`}>Deck</span>
+        <span class="t" style={`font-family:${th.font}`}>{deck.title}</span>
+        <span class="r" style={`background:${th.ac}`}></span>
+      </div>
+    )}
+  </figure>
+  {caption && (
+    <div class="deck-cap"><span>{deck.styleLabel}</span>{deck.deckSlides ? <span>{deck.deckSlides} slides</span> : null}</div>
+  )}
+</div>

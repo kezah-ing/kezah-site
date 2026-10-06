@@ -1,0 +1,292 @@
+---
+import Base from '../layouts/Base.astro';
+import DeckCover from '../components/DeckCover.astro';
+import { reader, getSite, getDecks, asset, fmtDate } from '../lib/content';
+
+const site = await getSite();
+const decks = await getDecks();
+const offers = (await reader.collections.offers.all()).map((o) => ({ slug: o.slug, ...o.entry })).sort((a, b) => a.order - b.order);
+const articles = (await reader.collections.articles.all()).map((a) => ({ slug: a.slug, ...a.entry })).filter((a) => a.show).sort((a, b) => (b.date ?? '').localeCompare(a.date ?? ''));
+const logos = (await reader.collections.logos.all()).map((l) => ({ ...l.entry, url: asset(l.entry.file, 'logos') })).filter((l) => l.show && l.url).sort((a, b) => a.order - b.order);
+const quotes = (await reader.collections.testimonials.all()).map((t) => t.entry).filter((t) => t.show && t.quote);
+const sectors = ['All', ...Array.from(new Set(decks.map((d) => d.sector).filter(Boolean)))];
+const portrait = asset(site.portrait, 'portrait');
+const bioPdf = asset(site.bioPdf, 'files');
+const arrow = 'M5 12h14M13 6l6 6-6 6';
+const ribbon = [...decks];
+const toHref = (a: (typeof articles)[number]) => a.externalUrl || (a.body ? `/writing/${a.slug}` : null);
+---
+<Base intro>
+  <section class="hero">
+    <div class="dots" aria-hidden="true"></div><div class="glow" aria-hidden="true"></div>
+    <div class="wrap" style="position:relative">
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow fadeup" style="animation-delay:calc(var(--d) + .1s)">{site.heroEyebrow}</div>
+          <h1 class="h1">
+            <span class="mask-line"><span style="animation-delay:calc(var(--d) + .15s)">{site.heroLine1}</span></span>
+            <span class="mask-line"><span style="animation-delay:calc(var(--d) + .3s)">{site.heroLine2}</span></span>
+            <span class="mask-line"><span style="animation-delay:calc(var(--d) + .45s)">{site.heroLine3Plain} <em>{site.heroLine3Accent}</em></span></span>
+            <span class="mask-line"><span style="animation-delay:calc(var(--d) + .6s)">{site.heroLine4}</span></span>
+          </h1>
+          <p class="hero-intro fadeup" style="animation-delay:calc(var(--d) + .9s)">{site.heroIntro}</p>
+          <div class="fadeup" style="display:flex;flex-wrap:wrap;gap:14px;margin-top:40px;align-items:center;animation-delay:calc(var(--d) + 1.05s)">
+            <a href="#contact" class="btn btn-primary">{site.primaryCta}<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={arrow}/></svg></a>
+            <a href="#work" class="btn btn-ghost">See the work</a>
+          </div>
+          <div class="fadeup mono" style="margin-top:18px;font-size:13px;color:var(--muted);animation-delay:calc(var(--d) + 1.15s)">{site.primaryCtaNote}</div>
+        </div>
+        {portrait && (
+          <figure class="portrait fadeup" style="animation-delay:calc(var(--d) + .8s)">
+            <img src={portrait} alt="Portrait of Kezah Kayitesi" width="1000" height="1276" fetchpriority="high" />
+            <figcaption>{site.portraitCaption}</figcaption>
+          </figure>
+        )}
+      </div>
+    </div>
+  </section>
+
+  {site.blindSpots.length > 0 && (
+    <section aria-label="Blind spots, measured" style="padding:0 0 20px">
+      <div class="wrap">
+        <div style="display:flex;align-items:center;gap:10px"><span class="pulse"></span><span class="eyebrow">Blind spots, measured</span></div>
+        <div class="g-auto" style="margin-top:22px">
+          {site.blindSpots.map((b) => (
+            <div class="blind" data-reveal>
+              <div class="bignum">{b.number}</div>
+              <div style="margin-top:12px;font-size:16px;line-height:1.45;color:var(--body);max-width:380px">{b.text}</div>
+              <div class="mono" style="margin-top:10px;font-size:11px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase">{b.source}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {ribbon.length > 0 && (
+    <section class="ribbons" aria-label="The decks, in motion">
+      <div class="ribbon ribbon-a">
+        <div class="track">
+          {[0, 1].map((pass) => ribbon.concat(ribbon).slice(0, ribbon.length * 2).map((d) => (
+            <a class="rdeck" href={`/work/${d.slug}`} tabindex={pass ? -1 : undefined} aria-hidden={pass ? 'true' : undefined}>
+              <DeckCover deck={d} caption={false} />
+              <div class="rdeck-name"><span>{d.title}</span><span>{d.sector}</span></div>
+            </a>
+          )))}
+        </div>
+      </div>
+      {site.ribbonWords.length > 0 && (
+        <div class="ribbon ribbon-b" aria-hidden="true">
+          <div class="track-r">
+            {[0, 1].map(() => site.ribbonWords.map((w) => (<><span class="rword">{w}</span><span class="rdot">·</span></>)))}
+          </div>
+        </div>
+      )}
+    </section>
+  )}
+
+  {offers.length > 0 && (
+    <section id="offers" class="section">
+      <div class="wrap">
+        <div class="eyebrow">01 · Offers</div>
+        <h2 class="h2" data-reveal>{site.offersHeading}</h2>
+        <div class="g-offers">
+          {offers.map((o, i) => (
+            <article class="card offer" data-reveal>
+              <div class="mono" style="font-size:12px;color:var(--ac);letter-spacing:.14em">{String(i + 1).padStart(2, '0')}</div>
+              <h3>{o.name}</h3>
+              <div style="font-size:14px;color:var(--muted);line-height:1.5"><span style="color:var(--text)">For</span> {o.who}</div>
+              <div style="font-size:15px;line-height:1.5;color:var(--soft)">{o.problem}</div>
+              <div class="get">{o.get}</div>
+              <div class="mono" style="margin-top:auto;font-size:12px;letter-spacing:.08em;color:var(--ac)">{o.timeframe}</div>
+            </article>
+          ))}
+        </div>
+        <div class="callout" data-reveal><p>{site.offersCta}</p><a href="#contact" class="btn btn-primary">Book the free call</a></div>
+      </div>
+    </section>
+  )}
+
+  {decks.length > 0 && (
+    <section id="work" class="section">
+      <div class="wrap">
+        <div class="eyebrow">02 · Selected work</div>
+        <h2 class="h2" data-reveal>{site.workHeading}</h2>
+        {sectors.length > 2 && (
+          <div class="filters js-only" role="group" aria-label="Filter by sector">
+            {sectors.map((s, i) => <button class="fbtn" data-filter={s} aria-pressed={String(i === 0)}>{s}</button>)}
+          </div>
+        )}
+        <div class="g-work" style="margin-top:28px">
+          {decks.map((d) => (
+            <article class="card project" data-sector={d.sector} data-reveal>
+              <div class="frame"><DeckCover deck={d} /></div>
+              <div class="body">
+                <div class="row"><span class="mono" style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)">{d.sector}</span></div>
+                <h3>{d.title}</h3>
+                <p>{d.oneLine}</p>
+                <div style="margin-top:auto;padding-top:6px"><div class="chip">{d.status}</div></div>
+                <a class="more" href={`/work/${d.slug}`}>View the case study<svg class="arrow" style="width:16px;height:16px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={arrow}/></svg></a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {site.methodStages.length > 0 && (
+    <section id="method" class="section">
+      <div class="wrap">
+        <div class="eyebrow">03 · Method</div>
+        <h2 class="h2" data-reveal>{site.methodHeading}</h2>
+        <p class="lead" data-reveal>{site.methodIntro}</p>
+        <div class="method-grid">
+          <div class="tabs js-only" role="tablist" aria-label="Method stages" style="flex-direction:column">
+            {site.methodStages.map((s, i) => (
+              <button class="tab" role="tab" aria-selected={String(i === 0)}><span class="n">{String(i + 1).padStart(2, '0')}</span><span class="nm">{s.name}</span></button>
+            ))}
+          </div>
+          <div class="card panel-card" data-reveal>
+            <div class="progress js-only"><i data-progress style={`width:${100 / site.methodStages.length}%`}></i></div>
+            <div class="stage-count js-only" data-stage-count aria-live="polite">STAGE 01 OF {String(site.methodStages.length).padStart(2, '0')}</div>
+            {site.methodStages.map((s, i) => (
+              <div class="panel" data-panel role="tabpanel">
+                <h3><span class="mono js-hide" style="font-size:14px;color:var(--ac)">{String(i + 1).padStart(2, '0')}</span>{s.name}</h3>
+                <div class="k">What happens</div><div class="v">{s.what}</div>
+                <div class="k">What you get</div><div class="v out">{s.out}</div>
+              </div>
+            ))}
+            <a href="#contact" style="margin-top:auto;display:inline-flex;align-items:center;gap:8px;font-weight:600">Start at stage 1 with a free call<svg class="arrow" style="width:16px;height:16px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={arrow}/></svg></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section id="why" class="section">
+    <div class="wrap">
+      <div class="eyebrow">04 · Why I do this</div>
+      <h2 class="h2" data-reveal>{site.whyHeading}</h2>
+      <p class="lead" data-reveal>{site.whyIntro}</p>
+      <div style="margin-top:44px;border-top:1px solid var(--line)">
+        {site.whyRows.map((w) => w.link ? (
+          <a class="whyrow" href={w.link} data-reveal><span class="line">{w.line}</span><span class="who">{w.venture}</span></a>
+        ) : (
+          <div class="whyrow" data-reveal><span class="line">{w.line}</span><span class="who">{w.venture}</span></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="section">
+    <div class="wrap">
+      <div class="eyebrow">05 · About and proof</div>
+      {site.metrics.length > 0 && (
+        <div class="g-auto" style="margin-top:40px;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))">
+          {site.metrics.map((m) => (
+            <div class="card metric" data-reveal>
+              <div class="bignum" data-count={m.value} data-plus={m.plus ? '1' : '0'}>{m.value.toLocaleString('en-US')}{m.plus ? '+' : ''}</div>
+              <div style="margin-top:12px;font-size:15px;line-height:1.45;color:var(--soft)">{m.label}</div>
+            </div>
+          ))}
+        </div>
+      )}
+      <div class="g-two" style="margin-top:64px;align-items:start">
+        <div style="display:flex;gap:28px;flex-wrap:wrap" data-reveal>
+          {portrait && <img src={portrait} alt="Kezah Kayitesi" width="220" height="281" loading="lazy" style="width:220px;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:50% 30%;border-radius:18px;border:1px solid rgba(243,239,231,.14)" />}
+          <div style="flex:1;min-width:240px">
+            <h3 class="serif" style="margin:0;font-size:30px;font-weight:300;line-height:1.15">{site.bioHeading}</h3>
+            <p style="margin:18px 0 0;font-size:16px;line-height:1.6;color:var(--soft)">{site.bioShort}</p>
+            {bioPdf && <a href={bioPdf} download class="btn btn-ghost" style="margin-top:24px">Download the one-page bio (PDF)</a>}
+          </div>
+        </div>
+        {site.credentials.length > 0 && (
+          <div data-reveal>
+            <div class="mono" style="font-size:11px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase">Credentials</div>
+            <ul class="creds">{site.credentials.map((c) => <li>{c}</li>)}</ul>
+          </div>
+        )}
+      </div>
+      {quotes.map((q) => (
+        <figure class="quote" data-reveal>
+          <blockquote>{q.quote}</blockquote>
+          <figcaption>{[q.name, q.role, q.organisation].filter(Boolean).join(' · ')}</figcaption>
+        </figure>
+      ))}
+      {logos.length > 0 && (
+        <div class="logos" data-reveal aria-label="Organisations I have worked with">
+          {logos.map((l) => <img src={l.url} alt={l.organisation} loading="lazy" />)}
+        </div>
+      )}
+    </div>
+  </section>
+
+  {articles.length > 0 && (
+    <section id="writing" class="section">
+      <div class="wrap">
+        <div class="eyebrow">06 · What I Think</div>
+        <h2 class="h2" data-reveal>{site.writingHeading}</h2>
+        <p class="lead" style="max-width:560px" data-reveal>{site.writingIntro}</p>
+        <div style="margin-top:40px;border-top:1px solid var(--line)">
+          {articles.map((a) => {
+            const href = toHref(a);
+            const Tag = href ? 'a' : 'div';
+            return (
+              <Tag class="piece" href={href ?? undefined} target={a.externalUrl ? '_blank' : undefined} rel={a.externalUrl ? 'noopener' : undefined} data-reveal>
+                <div>
+                  <div class="mono" style="font-size:12px;letter-spacing:.12em;color:var(--ac);text-transform:uppercase">{[fmtDate(a.date), a.series || a.type].filter(Boolean).join(' · ')}</div>
+                  <h3>{a.title}</h3>
+                  {a.gist && <p>{a.gist}</p>}
+                </div>
+                {href && <span style="font-weight:600;white-space:nowrap">Read</span>}
+              </Tag>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section id="contact" class="section" style="padding-bottom:80px">
+    <div class="wrap">
+      <div class="contact-box">
+        <div class="eyebrow">07 · Contact</div>
+        <h2>{site.contactHeading}</h2>
+        <div class="g-two" style="margin-top:48px;align-items:start">
+          <div>
+            <h3>{site.bookingTitle}</h3>
+            <p style="margin:12px 0 0;font-size:16px;line-height:1.55;color:var(--soft)">{site.bookingText}</p>
+            {site.calendarUrl && (
+              <div class="cal" data-cal={`${site.calendarUrl}?embed=true&theme=dark&layout=month_view`}>
+                <div data-cal-slot class="cal-fallback">
+                  <div class="serif" style="font-size:24px;font-weight:300">Pick a time that suits you</div>
+                  <a href={site.calendarUrl} target="_blank" rel="noopener" class="btn btn-primary">Open the booking calendar</a>
+                </div>
+              </div>
+            )}
+            {site.calendarUrl && <p class="form-note" style="margin-top:12px">Calendar not showing? <a href={site.calendarUrl} target="_blank" rel="noopener" style="text-decoration:underline">Open it in a new tab</a>.</p>}
+          </div>
+          <form class="form" data-enquiry data-endpoint={site.formEndpoint ?? ''} data-email={site.email} method="post" action={site.formEndpoint ?? `mailto:${site.email}`} enctype={site.formEndpoint ? undefined : 'text/plain'}>
+            <h3>Or enquire about an engagement</h3>
+            <div class="field"><label for="f-name">Name</label><input id="f-name" name="name" type="text" autocomplete="name" required /></div>
+            <div class="field"><label for="f-co">Company or institution</label><input id="f-co" name="company" type="text" autocomplete="organization" /></div>
+            <div class="field"><label for="f-mail">Email</label><input id="f-mail" name="email" type="email" autocomplete="email" required /></div>
+            <div class="field"><label for="f-offer">Which offer interests you?</label>
+              <select id="f-offer" name="offer">
+                {offers.map((o) => <option>{o.name}</option>)}<option>Not sure yet</option>
+              </select></div>
+            <div class="field"><label for="f-msg">What is failing? (optional)</label><textarea id="f-msg" name="message"></textarea></div>
+            <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" />
+            <button type="submit" class="btn btn-primary" style="align-self:flex-start">Send enquiry</button>
+            <div class="form-note" data-status role="status">Pricing for engagements is shared on request.</div>
+          </form>
+        </div>
+        <div class="contact-links">
+          <a href={`mailto:${site.email}`}>{site.email}</a>
+          <a href={`tel:${site.phoneLink}`}>{site.phone}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,8 @@
+{
+  "name": "Blind Spot Diagnostic",
+  "order": 1,
+  "who": "institutions that know something is failing but not why.",
+  "problem": "The root cause is invisible, so money goes to symptoms.",
+  "get": "A problem research brief, a stakeholder map, where the data is missing, and a clear recommendation on whether to build.",
+  "timeframe": "About 3–4 weeks"
+}

@@ -1,0 +1,8 @@
+{
+  "name": "Build Team Assembly",
+  "order": 3,
+  "who": "clients holding a blueprint.",
+  "problem": "The right builders are hard to find and brief.",
+  "get": "A curated, briefed execution team: developers, engineers, architects, depending on the sector.",
+  "timeframe": "Scoped per project"
+}

@@ -1,0 +1,42 @@
+{
+  "order": 5,
+  "featured": true,
+  "sector": "Health",
+  "geography": "Rwanda",
+  "method": "",
+  "oneLine": "A concept note and funding proposal to close Rwanda's youth sexual-health access gap with one private kit and two delivery tracks.",
+  "outcome": "Rwanda's young people know where to get tested. Most still don't. SRB is a concept note and funding proposal to close that gap.",
+  "status": "Concept note circulating to funders; none secured yet",
+  "clientName": "",
+  "confidentiality": "",
+  "role": "",
+  "cover": "srb.webp",
+  "deckStyle": "editorial",
+  "deckStyleLabel": "",
+  "deckSlides": 7,
+  "canvaUrl": "https://www.canva.com/d/77kcUJTx0fcAV1t",
+  "canvaDesignId": "DAHWGYBduP0",
+  "pdf": "srb-deck.pdf",
+  "metrics": [
+    {
+      "value": "45%",
+      "label": "of young women still don't get an HIV test"
+    },
+    {
+      "value": "96%",
+      "label": "of 15–24-year-olds know where to get one"
+    },
+    {
+      "value": "USD 2.0–2.5M",
+      "label": "funding ask"
+    }
+  ],
+  "aha": "",
+  "hypothesis": "",
+  "validation": "",
+  "concept": "",
+  "evidence": [],
+  "lessons": "",
+  "seoDescription": "SRB: a concept note and funding proposal to close the youth sexual-health access gap in Rwanda. Circulating to funders; none secured.",
+  "title": "SRB"
+}
