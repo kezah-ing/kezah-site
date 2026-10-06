@@ -1,0 +1,24 @@
+name: Rename PDFs
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  rename:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          set -e
+          cd public/uploads/files
+          mv "BEV_Digital_Sovereign_Infrastructure_(4) (2).pdf" BEV_Digital_Sovereign_Infrastructure_4_2.pdf
+          mv "Kesho_Investment_Marketplace_(5).pdf" Kesho_Investment_Marketplace_5.pdf
+          mv "SOMA 1 Case Study.pdf" SOMA_1_Case_Study.pdf
+          mv "SRB Case Study.pdf" SRB_Case_Study.pdf
+          mv "Snappe Case Study.pdf" Snappe_Case_Study.pdf
+          cd ../../..
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add -A
+          git commit -m "Rename deck PDFs"
+          git push
