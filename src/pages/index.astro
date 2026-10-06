@@ -12,6 +12,7 @@ const quotes = (await reader.collections.testimonials.all()).map((t) => t.entry)
 const sectors = ['All', ...Array.from(new Set(decks.map((d) => d.sector).filter(Boolean)))];
 const portrait = asset(site.portrait, 'portrait');
 const bioPdf = asset(site.bioPdf, 'files');
+const cvPdf = asset(site.cvPdf, 'files');
 const arrow = 'M5 12h14M13 6l6 6-6 6';
 const ribbon = [...decks];
 const toHref = (a: (typeof articles)[number]) => a.externalUrl || (a.body ? `/writing/${a.slug}` : null);
@@ -198,7 +199,12 @@ const toHref = (a: (typeof articles)[number]) => a.externalUrl || (a.body ? `/wr
           <div style="flex:1;min-width:240px">
             <h3 class="serif" style="margin:0;font-size:30px;font-weight:300;line-height:1.15">{site.bioHeading}</h3>
             <p style="margin:18px 0 0;font-size:16px;line-height:1.6;color:var(--soft)">{site.bioShort}</p>
-            {bioPdf && <a href={bioPdf} download class="btn btn-ghost" style="margin-top:24px">Download the one-page bio (PDF)</a>}
+            {(cvPdf || bioPdf) && (
+              <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:24px">
+                {cvPdf && <a href={cvPdf} target="_blank" rel="noopener" class="btn btn-ghost">Download my CV (PDF)</a>}
+                {bioPdf && <a href={bioPdf} target="_blank" rel="noopener" class="btn btn-ghost">Download the one-page profile (PDF)</a>}
+              </div>
+            )}
           </div>
         </div>
         {site.credentials.length > 0 && (

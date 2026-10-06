@@ -36,6 +36,7 @@ export default config({
         formEndpoint: fields.url({ label: 'Enquiry form address (Formspree). Leave empty to send by email app.' }),
         bioShort: fields.text({ label: 'Bio, About section', multiline: true }),
         bioHeading: fields.text({ label: 'Bio, one-line statement' }),
+        cvPdf: fields.file({ label: 'CV (PDF)', directory: 'public/uploads/files', publicPath: '/uploads/files/' }),
         bioPdf: fields.file({ label: 'One-page bio (PDF)', directory: 'public/uploads/files', publicPath: '/uploads/files/' }),
         metaDescription: fields.text({ label: 'Search and share description', multiline: true }),
         shareImage: fields.image({ label: 'Share image (1200 by 630)', ...img('portrait') }),
