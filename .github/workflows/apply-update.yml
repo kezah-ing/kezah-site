@@ -1,0 +1,23 @@
+name: Apply update
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply the update zip and tidy up
+        run: |
+          set -e
+          ZIP=$(find . -maxdepth 1 -name 'update-*.zip' | head -1)
+          echo "Found: $ZIP"
+          test -n "$ZIP"
+          unzip -o -q "$ZIP" -d .
+          rm -f "$ZIP"
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add -A
+          git commit -m "Apply site update"
+          git push
