@@ -13,7 +13,7 @@ const { a } = Astro.props;
       <a href="/#writing" class="crumb">← What I Think</a>
       <div class="eyebrow" style="margin-top:36px">{[fmtDate(a.date), a.series || a.type].filter(Boolean).join(' · ')}</div>
       <h1 class="cs-title" style="font-size:clamp(38px,6vw,76px)">{a.title}</h1>
-      <div class="prose" style="margin-top:40px">{paras(a.body).map((p) => <p>{p}</p>)}</div>
+      <div class="prose" style="margin-top:40px">{paras(a.body).map((p) => p.startsWith('## ') ? <h2>{p.slice(3)}</h2> : <p>{p.split('\n').map((l, i) => <>{i > 0 && <br />}{l}</>)}</p>)}</div>
     </div>
   </article>
 </Base>

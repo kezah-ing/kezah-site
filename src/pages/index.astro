@@ -15,7 +15,7 @@ const bioPdf = asset(site.bioPdf, 'files');
 const cvPdf = asset(site.cvPdf, 'files');
 const arrow = 'M5 12h14M13 6l6 6-6 6';
 const ribbon = [...decks];
-const toHref = (a: (typeof articles)[number]) => a.externalUrl || (a.body ? `/writing/${a.slug}` : null);
+const toHref = (a: (typeof articles)[number]) => a.body ? `/writing/${a.slug}` : a.externalUrl || null;
 ---
 <Base intro>
   <section class="hero">
@@ -239,7 +239,7 @@ const toHref = (a: (typeof articles)[number]) => a.externalUrl || (a.body ? `/wr
             const href = toHref(a);
             const Tag = href ? 'a' : 'div';
             return (
-              <Tag class="piece" href={href ?? undefined} target={a.externalUrl ? '_blank' : undefined} rel={a.externalUrl ? 'noopener' : undefined} data-reveal>
+              <Tag class="piece" href={href ?? undefined} target={!a.body && a.externalUrl ? '_blank' : undefined} rel={!a.body && a.externalUrl ? 'noopener' : undefined} data-reveal>
                 <div>
                   <div class="mono" style="font-size:12px;letter-spacing:.12em;color:var(--ac);text-transform:uppercase">{[fmtDate(a.date), a.series || a.type].filter(Boolean).join(' · ')}</div>
                   <h3>{a.title}</h3>
