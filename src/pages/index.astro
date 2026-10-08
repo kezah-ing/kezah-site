@@ -193,7 +193,7 @@ const toHref = (a: (typeof articles)[number]) => a.body ? `/writing/${a.slug}` :
           ))}
         </div>
       )}
-      {site.metricsNote && <p data-reveal style="margin:20px 0 0;max-width:760px;font-size:13px;line-height:1.55;color:var(--muted)">{site.metricsNote}</p>}
+      {site.metricsNote && <p data-reveal style="margin:22px 0 0;font-size:12px;line-height:1.55;color:var(--muted);opacity:.75">{site.metricsNote.split('\n').filter(Boolean).join(' ')}</p>}
       <div class="g-two" style="margin-top:64px;align-items:start">
         <div style="display:flex;gap:28px;flex-wrap:wrap" data-reveal>
           {portrait && <img src={portrait} alt="Kezah Kayitesi" width="220" height="281" loading="lazy" style="width:220px;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:50% 30%;border-radius:18px;border:1px solid rgba(243,239,231,.14)" />}
