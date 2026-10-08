@@ -115,24 +115,36 @@
   ],
   "metrics": [
     {
-      "value": 3831,
+      "value": 2.8,
+      "prefix": "",
+      "suffix": "M",
+      "decimals": 1,
       "plus": false,
-      "label": "primary schools in SOMA 1's national design"
+      "label": "primary learners in Rwanda whom SOMA 1's national design is built to reach"
     },
     {
-      "value": 2500,
-      "plus": true,
-      "label": "young people engaged through participatory action research"
-    },
-    {
-      "value": 1000,
-      "plus": true,
-      "label": "vendors on Snappe, which I co-founded"
-    },
-    {
-      "value": 2,
+      "value": 7,
+      "prefix": "$",
+      "suffix": "B",
+      "decimals": 0,
       "plus": false,
-      "label": "countries where AC Group revenue reporting was adopted"
+      "label": "freed up for every 1% of leakage recovered across Africa's food and beverage market, through BEV Digital (modelled)"
+    },
+    {
+      "value": 4.8,
+      "prefix": "$",
+      "suffix": "B",
+      "decimals": 1,
+      "plus": false,
+      "label": "a year if 5% of the $96B Africa receives in remittances were channelled into investment through Kesho (modelled)"
+    },
+    {
+      "value": 23.6,
+      "prefix": "",
+      "suffix": "%",
+      "decimals": 1,
+      "plus": false,
+      "label": "of adolescent girls in East Africa become pregnant: the access gap SRB is designed to close"
     }
   ],
   "credentials": [
@@ -141,5 +153,6 @@
     "Management Science & Engineering, Stanford Center for Professional Development (2023)",
     "Four University of Geneva courses in investment and portfolio management; Jasiri alumna (2021)"
   ],
-  "footerLine": "© 2026 Kezah Kayitesi · Kigali, Rwanda"
+  "footerLine": "© 2026 Kezah Kayitesi · Kigali, Rwanda",
+  "metricsNote": "SOMA 1, BEV Digital, Kesho and SRB are project aliases for designed systems. These figures show the scale each one is designed to address; modelled figures are marked. Sources: Rwanda Ministry of Education via NISR (2022/23 enrolment); McKinsey Global Institute (Africa consumer spending); ISS Africa (remittances, 2024); Pan African Medical Journal meta-analysis (East Africa, 2013–2023)."
 }

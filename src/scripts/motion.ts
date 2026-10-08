@@ -89,11 +89,13 @@ if (reduce) {
   // Counters
   $$('[data-count]').forEach((el) => {
     const end = Number(el.dataset.count), plus = el.dataset.plus === '1';
+    const pre = el.dataset.prefix || '', suf = el.dataset.suffix || '', dec = Number(el.dataset.dec || 0);
+    const fmt = (n: number) => pre + n.toLocaleString('en-US', { minimumFractionDigits: dec, maximumFractionDigits: dec }) + suf + (plus ? '+' : '');
     const o = { v: 0 };
-    el.textContent = '0';
+    el.textContent = fmt(0);
     ScrollTrigger.create({
       trigger: el, start: 'top 90%', once: true,
-      onEnter: () => gsap.to(o, { v: end, duration: 1.8, ease: 'power3.out', onUpdate: () => { el.textContent = Math.round(o.v).toLocaleString('en-US'); }, onComplete: () => { el.textContent = end.toLocaleString('en-US') + (plus ? '+' : ''); } }),
+      onEnter: () => gsap.to(o, { v: end, duration: 1.8, ease: 'power3.out', onUpdate: () => { el.textContent = fmt(o.v); }, onComplete: () => { el.textContent = fmt(end); } }),
     });
   });
 
